@@ -13,33 +13,24 @@
  * }
  * }
  */
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
-        LinkedList<Integer> result = new LinkedList<>();
-        if (root == null) {
-            return result;
+        List<Integer> list = new ArrayList<>();
+        return ans(root,list);
+    }
+
+    public List<Integer> ans(TreeNode root,List<Integer> list){
+
+        if(root == null){
+            return list;
         }
 
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
+        ans(root.left,list);
 
-        while (!stack.isEmpty()) {
-            TreeNode curr = stack.pop();
-            
-            result.addFirst(curr.val);
+        ans(root.right,list);
 
-            if (curr.left != null) {
-                stack.push(curr.left);
-            }
-            if (curr.right != null) {
-                stack.push(curr.right);
-            }
-        }
+        list.add(root.val);
 
-        return result;
+        return list;
     }
 }
